@@ -33,7 +33,7 @@ export default async function AdminPage() {
   });
 
   return (
-    <div className="container mx-auto">
+    <div className="w-full max-w-7xl mx-auto">
       <GradientHeader
         title="Admin Dashboard"
         subtitle="Manage feedback and update their status"

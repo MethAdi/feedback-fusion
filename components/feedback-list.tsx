@@ -83,28 +83,30 @@ export default function FeedbackList({
   };
 
   return (
-    <div className="space-y-4">
+    <div className="w-full space-y-4">
       {posts.map((post) => (
         <Card
           key={post.id}
-          className="hover:shadow-md transition-shadow border"
+          className="w-full hover:shadow-md transition-shadow border"
         >
           <CardHeader>
-            <div className="flex justify-between gap-2">
+            <div className="flex flex-col md:flex-row md:justify-between gap-3 md:gap-2">
               <div className="flex flex-col gap-1 min-w-0">
-                <CardTitle className="text-lg">{post.title}</CardTitle>
-                <CardDescription className="flex items-center gap-1.5 mt-1">
+                <CardTitle className="text-base md:text-lg">
+                  {post.title}
+                </CardTitle>
+                <CardDescription className="flex items-center gap-1.5 mt-1 text-sm">
                   <UserIcon className="h-3 w-3" />
-                  {post.author.name}
-                  <span>|</span>
-                  <span className="whitespace-nowrap">
+                  <span className="truncate">{post.author.name}</span>
+                  <span className="hidden sm:inline">|</span>
+                  <span className="whitespace-nowrap text-xs sm:text-sm">
                     {formatDistanceNow(new Date(post.createdAt), {
                       addSuffix: true,
                     })}
                   </span>
                 </CardDescription>
               </div>
-              <div className="flex items-center gap-1.5 shrink-0">
+              <div className="flex items-center gap-1.5 flex-wrap md:shrink-0">
                 {/* STATUS BADGE */}
                 {(() => {
                   const statusGroup =
@@ -140,13 +142,15 @@ export default function FeedbackList({
             </div>
           </CardHeader>
           <CardContent>
-            <p className="text-muted-foreground">{post.description}</p>
-            <div className="flex items-center justify-between">
+            <p className="text-muted-foreground text-sm md:text-base mb-4">
+              {post.description}
+            </p>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => handleVote(post.id)}
-                className="gap-2"
+                className="gap-2 w-full sm:w-auto"
               >
                 <ThumbsUp
                   className={`h-4 w-4 ${
@@ -157,7 +161,7 @@ export default function FeedbackList({
                 />
                 {post.votes.length} Votes
               </Button>
-              <div className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors">
+              <div className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors justify-center sm:justify-start">
                 <MessageSquare className="h-4 w-4" />
                 Comment
               </div>

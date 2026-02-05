@@ -63,21 +63,21 @@ export default async function RoadmapPage() {
   //const underReviewPercentage = getStatusPercentage(posts,"under_review");
 
   return (
-    <div className="space-y-12">
+    <div className="w-full max-w-7xl mx-auto space-y-8 sm:space-y-12">
       <GradientHeader
         title="Product Roadmap"
         subtitle="See what were working on,  whats next and track our progress"
       />
       {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 ">
         <Card className="border-l-4 border-l-blue-500">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Total Features</p>
-                <p className="text-3xl font-bold">{posts.length}</p>
+                <p className="text-2xl md:text-3xl font-bold">{posts.length}</p>
               </div>
-              <Target className="h-20 w-10 text-blue-500" />
+              <Target className="h-8 w-8 md:h-10 md:w-10 text-blue-500" />
             </div>
             <br />
           </CardContent>
@@ -87,9 +87,9 @@ export default async function RoadmapPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Total Votes</p>
-                <p className="text-3xl font-bold">{totalVotes}</p>
+                <p className="text-2xl md:text-3xl font-bold">{totalVotes}</p>
               </div>
-              <BarChart3 className="h-20 w-10 text-purple-500" />
+              <BarChart3 className="h-8 w-8 md:h-10 md:w-10 text-purple-500" />
             </div>
           </CardContent>
         </Card>
@@ -98,9 +98,9 @@ export default async function RoadmapPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Completed</p>
-                <p className="text-3xl font-bold">{groupedPosts.live.length}</p>
+                <p className="text-2xl md:text-3xl font-bold">{groupedPosts.live.length}</p>
               </div>
-              <CheckCircle className="h-20 w-10 text-green-500" />
+              <CheckCircle className="h-8 w-8 md:h-10 md:w-10 text-green-500" />
             </div>
           </CardContent>
         </Card>
@@ -109,9 +109,9 @@ export default async function RoadmapPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Average Votes</p>
-                <p className="text-3xl font-bold">{averageVotes}</p>
+                <p className="text-2xl md:text-3xl font-bold">{averageVotes}</p>
               </div>
-              <Users className="h-20 w-10 text-yellow-500" />
+              <Users className="h-8 w-8 md:h-10 md:w-10 text-yellow-500" />
             </div>
           </CardContent>
         </Card>
@@ -135,23 +135,23 @@ export default async function RoadmapPage() {
             <Progress value={completedPercentage} className="h-2" />
           </div>
 
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
+              <div className="text-xl md:text-2xl font-bold text-yellow-600 dark:text-yellow-400">
                 {inProgressPercentage}%
               </div>
               <div className="text-sm text-muted-foreground">In Progress</div>
             </div>
 
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+              <div className="text-xl md:text-2xl font-bold text-blue-600 dark:text-blue-400">
                 {plannedPercentage}%
               </div>
               <div className="text-sm text-muted-foreground">Planned</div>
             </div>
 
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-600 dark:text-green-400">
+              <div className="text-xl md:text-2xl font-bold text-green-600 dark:text-green-400">
                 {completedPercentage}%
               </div>
               <div className="text-sm text-muted-foreground">Completed</div>
@@ -160,7 +160,7 @@ export default async function RoadmapPage() {
         </CardContent>
       </Card>
       {/* Roadmap Columns */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         {STATUS_ORDER.map((status) => {
           const group = STATUS_GROUPS[status as keyof typeof STATUS_GROUPS];
           const Icon = group.icon;
@@ -194,11 +194,11 @@ export default async function RoadmapPage() {
                     className="hover:shadow-lg transition-all duration-200 hover:translate-y-1 cursor-pointer"
                   >
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-sm font-medium">
+                      <CardTitle className="text-sm font-medium leading-tight">
                         {post.title}
                       </CardTitle>
                       <CardDescription className="text-xs text-muted-foreground">
-                        {post.author.name} | {post.votes.length} votes
+                        <span className="truncate">{post.author.name}</span> | {post.votes.length} votes
                       </CardDescription>
                     </CardHeader>
                     <CardContent>

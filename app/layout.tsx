@@ -12,6 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Feedback Fusion Public-Roadmap",
   description: "A platform for users to suggest and vote on features.",
+  viewport: "width=device-width, initial-scale=1",
 };
 
 export default async function RootLayout({
@@ -23,7 +24,7 @@ export default async function RootLayout({
   return (
     <ClerkProvider>
       <html suppressHydrationWarning>
-        <body className={`${inter.className} min-h-screen flex flex-col  `}>
+        <body className={`${inter.className} min-h-screen flex flex-col`}>
           <ThemeProvider
             attribute="class"
             defaultTheme="light"
@@ -32,7 +33,7 @@ export default async function RootLayout({
             {/* Navbar */}
             <Navbar />
             {/* Main section */}
-            <main className="flex-1 container mx-auto px-4 py-8">
+            <main className="flex-1 w-full max-w-none mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8">
               {children}
             </main>
             {/* Footer */}
