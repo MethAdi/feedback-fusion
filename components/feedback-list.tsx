@@ -163,7 +163,7 @@ export default function FeedbackList({
               </Button>
               <div className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors justify-center sm:justify-start">
                 <MessageSquare className="h-4 w-4" />
-                Comment
+                Thread
               </div>
             </div>
           </CardContent>

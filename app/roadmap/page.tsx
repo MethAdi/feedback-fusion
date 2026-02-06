@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import React from "react";
 import { STATUS_GROUPS, STATUS_ORDER } from "../data/status-data";
-
+import RoadmapGrid from "@/components/roadmap-grid";
 function getStatusPercentage(posts: any, status: string) {
   const total = posts.length;
   const count = posts.filter(
@@ -98,7 +98,9 @@ export default async function RoadmapPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Completed</p>
-                <p className="text-2xl md:text-3xl font-bold">{groupedPosts.live.length}</p>
+                <p className="text-2xl md:text-3xl font-bold">
+                  {groupedPosts.live.length}
+                </p>
               </div>
               <CheckCircle className="h-8 w-8 md:h-10 md:w-10 text-green-500" />
             </div>
@@ -116,9 +118,7 @@ export default async function RoadmapPage() {
           </CardContent>
         </Card>
       </div>
-
       {/* Overall Progress */}
-
       <Card>
         <CardHeader>
           <CardTitle>Roadmap Progress</CardTitle>
@@ -160,80 +160,7 @@ export default async function RoadmapPage() {
         </CardContent>
       </Card>
       {/* Roadmap Columns */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-        {STATUS_ORDER.map((status) => {
-          const group = STATUS_GROUPS[status as keyof typeof STATUS_GROUPS];
-          const Icon = group.icon;
-          const postsInGroup =
-            groupedPosts[status as keyof typeof groupedPosts];
-
-          return (
-            <div key={status} className="space-y-4">
-              <div
-                className={`rounded-lg p-4 ${group.bgColor} border ${group.colour}`}
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2 ">
-                    <Icon className={`h-5 w-5 ${group.textColor}`} />
-                    <h2 className={`text-lg font-semibold ${group.textColor}`}>
-                      {group.title}
-                    </h2>
-                    <Badge className={group.countColor}>
-                      {postsInGroup.length}
-                    </Badge>
-                  </div>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  {group.description}
-                </p>
-              </div>
-              <div className="space-y-4">
-                {postsInGroup.map((post) => (
-                  <Card
-                    key={post.id}
-                    className="hover:shadow-lg transition-all duration-200 hover:translate-y-1 cursor-pointer"
-                  >
-                    <CardHeader className="pb-3">
-                      <CardTitle className="text-sm font-medium leading-tight">
-                        {post.title}
-                      </CardTitle>
-                      <CardDescription className="text-xs text-muted-foreground">
-                        <span className="truncate">{post.author.name}</span> | {post.votes.length} votes
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex justify-between items-center">
-                        <Badge className="text-xs">{post.category}</Badge>
-                        {status === "in_progress" && (
-                          <div className="flex items-center gap-1 text-xs text-yellow-500">
-                            <Clock className="h-3 w-3" />
-                            Active
-                          </div>
-                        )}
-                        {status === "live" && (
-                          <div className="flex items-center gap-1 text-xs text-green-500">
-                            <CheckCheck className="h-3 w-3" />
-                            Shipped
-                          </div>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-                {postsInGroup.length === 0 && (
-                  <Card className="border-dashed opacity-60">
-                    <CardContent className="py-8 text-center">
-                      <p className="text-sm text-muted-foreground">
-                        No items in this stage
-                      </p>
-                    </CardContent>
-                  </Card>
-                )}
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      <RoadmapGrid initialPosts={posts} />
     </div>
   );
 }
