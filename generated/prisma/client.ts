@@ -54,3 +54,8 @@ export type Post = Prisma.PostModel
  * 
  */
 export type Vote = Prisma.VoteModel
+/**
+ * Model Comment
+ * 
+ */
+export type Comment = Prisma.CommentModel
